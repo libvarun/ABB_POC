@@ -5,9 +5,7 @@
 
 This sample is for viewing models and issues.
 
-### Live version
 
-[https://thermonpoc.herokuapp.com/](https://thermonpoc.herokuapp.com/)
 
 
 # Setup

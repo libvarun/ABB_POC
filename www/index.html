@@ -79,19 +79,15 @@
                                   <div class="reflex-element " style="-webkit-box-flex: 0.35; flex: 0.35 1 0%;">
                                      <div style="height: 100%; width: 100%;">
                                         <div class="item-list-container">
-                                           <div class="list-item ">
-                                              <div class="item-priority" style="background-color: rgba(255, 140, 0, 0.3); border: 2px solid rgb(255, 140, 0);"></div>
-                                              <label>#326441</label>
-                                           </div>
-                                           <div class="list-item ">
+                                           <div class="list-item" data-num="1">
                                               <div class="item-priority" style="background-color: rgba(255, 140, 0, 0.3); border: 2px solid rgb(255, 140, 0);"></div>
                                               <label>#643221</label>
                                            </div>
-                                           <div class="list-item ">
+                                           <div class="list-item" data-num="2">
                                               <div class="item-priority" style="background-color: rgba(255, 136, 136, 0.3); border: 2px solid rgb(255, 0, 0);"></div>
                                               <label>#335464</label>
                                            </div>
-                                           <div class="list-item ">
+                                           <div class="list-item" data-num="3">
                                               <div class="item-priority" style="background-color: rgba(255, 136, 136, 0.3); border: 2px solid rgb(255, 0, 0);"></div>
                                               <label>#664421</label>
                                            </div>
@@ -100,7 +96,11 @@
                                   </div>
                                   <div class="reflex-splitter "></div>
                                   <div class="reflex-element graph-list-container" style="-webkit-box-flex: 0.65; flex: 0.65 1 0%;">
-                                     <div style="height: 246px; width: 459px;"></div>
+                                     <div>
+                                        <canvas class="chart" id="mycanvas1" width="400" height="100"></canvas>
+                                        <canvas class="chart" id="mycanvas2" width="400" height="100"></canvas>
+                                        <canvas class="chart" id="mycanvas3" width="400" height="100"></canvas>
+                                     </div>
                                   </div>
                                </div>
                             </div>
@@ -137,6 +137,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     <script src="./libs/snap.svg-min.js"></script>
+    <script src="./libs/smoothie.js"></script>
     <script>
         baguetteBox.run('.tz-gallery');
     </script>

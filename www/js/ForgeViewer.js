@@ -211,12 +211,31 @@ for(pushpin in pushpins){
       } 
   }); 
   
-  var nav = viewer.navigation;
+//   var nav = viewer.navigation;
+  //code from: 
+function zoom (){
+    var nav = viewer.navigation
+    var pos = nav.getPosition()
+    var target = nav.getTarget()
+    var viewdir = new THREE.Vector3()
+    viewdir.subVectors (pos, target).normalize()
+    // zooms out by 100 along the view direction
+    viewdir.multiplyScalar (1000)
+    pos.add(viewdir)
+    nav.setPosition(pos)
+}
 $('.list-item').click(function(){
+    // viewer.fitToView();
     var num = $(this).attr('data-num');
     if(num == 1){
         // viewer.Toolkit.isolateFull(this.viewer)
-        nav.setPosition(pushpins[0])
+        // nav.setPosition(pushpins[0])
+        var dbid = [10073]
+// viewer.select(dbid)
+viewer.fitToView(dbid, viewer.model)
+zoom() 
+
+
         var smoothie = new SmoothieChart();
         smoothie.streamTo(document.getElementById("mycanvas1"));
         // Data
@@ -227,7 +246,10 @@ $('.list-item').click(function(){
         smoothie.addTimeSeries(line1);
 
     }else if(num == 2){
-        nav.setPosition(pushpins[1])
+        // nav.setPosition(pushpins[1])
+        var dbid = [3761]
+        viewer.fitToView(dbid, viewer.model)
+        zoom() 
         var smoothie = new SmoothieChart({
             grid: { strokeStyle:'rgb(125, 0, 0)', fillStyle:'rgb(60, 0, 0)',
             lineWidth: 1, millisPerLine: 250, verticalSections: 6, },
@@ -245,7 +267,10 @@ var line2 = new TimeSeries();
             smoothie.addTimeSeries(line2,
                 { strokeStyle:'rgb(255, 0, 255)', fillStyle:'rgba(255, 0, 255, 0.3)', lineWidth:3 });
     }else{
-        nav.setPosition(pushpins[2])
+        // nav.setPosition(pushpins[2])
+        var dbid = [10948]
+        viewer.fitToView(dbid, viewer.model)
+        zoom() 
         var smoothie = new SmoothieChart();
         smoothie.streamTo(document.getElementById("mycanvas3"));
         // Data

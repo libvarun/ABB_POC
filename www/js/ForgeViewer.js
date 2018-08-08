@@ -271,14 +271,14 @@ var line2 = new TimeSeries();
         var dbid = [10948]
         viewer.fitToView(dbid, viewer.model)
         zoom() 
-        var smoothie = new SmoothieChart();
-        smoothie.streamTo(document.getElementById("mycanvas3"));
-        // Data
-        var line1 = new TimeSeries();
-        setInterval(function() {
-        line1.append(new Date().getTime(), Math.random());
-        },500);
-        smoothie.addTimeSeries(line1);
+        // var smoothie = new SmoothieChart();
+        // smoothie.streamTo(document.getElementById("mycanvas3"));
+        // // Data
+        // var line1 = new TimeSeries();
+        // setInterval(function() {
+        // line1.append(new Date().getTime(), Math.random());
+        // },500);
+        // smoothie.addTimeSeries(line1);
     }
            
 })

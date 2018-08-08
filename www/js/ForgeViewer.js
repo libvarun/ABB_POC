@@ -176,15 +176,20 @@ function onDocumentLoadFailure(viewerErrorCode) {
 
 function onItemLoadSuccess(viewer, item) {
   // item loaded, any custom action?
-  var pushpins = [{x:251.08190451974164, y: -219.12292480939604, z:-220.8910194835148},
+  var pushpins = [{x:-732.6904673656754, y: -239.0262101555732, z:23.396726279618637},
                    {x:-487.1797671706493, y: -255.60155803366868, z:-673.434250425583},
-                {x:-732.6904673656754, y: -239.0262101555732, z:23.396726279618637}
+                   {x:251.08190451974164, y: -219.12292480939604, z:-220.8910194835148}
                 ]
   _viewer3D = viewer;
 //   $(_viewer3D.container).bind("click", onMouseClick);
 for(pushpin in pushpins){
-    drawPushpin(pushpins[pushpin])
+    drawPushpin(pushpins[pushpin],pushpin)
 }
+$('.markup').click(function(){
+    var id = $(this).attr('data-val');
+    id = 1 + parseInt(id);
+    $(".list-item[data-num='"+id+"']").click();
+})
   _viewer3D.addEventListener(Autodesk.Viewing.CAMERA_CHANGE_EVENT, function(rt){  
 
     var $eles = $("div[id^='mymk']");
@@ -224,6 +229,8 @@ function zoom (){
     pos.add(viewdir)
     nav.setPosition(pos)
 }
+var graph1shown = false;
+var graph2shown = false;
 $('.list-item').click(function(){
     // viewer.fitToView();
     var num = $(this).attr('data-num');
@@ -235,21 +242,25 @@ $('.list-item').click(function(){
 viewer.fitToView(dbid, viewer.model)
 zoom() 
 
+if(!graph1shown){
 
-        var smoothie = new SmoothieChart();
-        smoothie.streamTo(document.getElementById("mycanvas1"));
-        // Data
-        var line1 = new TimeSeries();
-        setInterval(function() {
+    var smoothie = new SmoothieChart();
+    smoothie.streamTo(document.getElementById("mycanvas1"));
+    // Data
+    var line1 = new TimeSeries();
+    setInterval(function() {
         line1.append(new Date().getTime(), Math.random());
-        },500);
-        smoothie.addTimeSeries(line1);
+    },500);
+    smoothie.addTimeSeries(line1);
+    graph1shown = true;
+}
 
     }else if(num == 2){
         // nav.setPosition(pushpins[1])
         var dbid = [3761]
         viewer.fitToView(dbid, viewer.model)
         zoom() 
+        if(!graph2shown){
         var smoothie = new SmoothieChart({
             grid: { strokeStyle:'rgb(125, 0, 0)', fillStyle:'rgb(60, 0, 0)',
             lineWidth: 1, millisPerLine: 250, verticalSections: 6, },
@@ -266,6 +277,8 @@ var line2 = new TimeSeries();
             { strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(0, 255, 0, 0.4)', lineWidth:3 });
             smoothie.addTimeSeries(line2,
                 { strokeStyle:'rgb(255, 0, 255)', fillStyle:'rgba(255, 0, 255, 0.3)', lineWidth:3 });
+                graph2shown = true;
+            }
     }else{
         // nav.setPosition(pushpins[2])
         var dbid = [10948]
@@ -348,7 +361,7 @@ function makeid() {
   return text;
   }
 
-function drawPushpin(pushpinModelPt){  
+function drawPushpin(pushpinModelPt,num){  
 
   var screenpoint = _viewer3D.worldToClient(
                     new THREE.Vector3(pushpinModelPt.x,
@@ -356,18 +369,18 @@ function drawPushpin(pushpinModelPt){
                                       pushpinModelPt.z,));
 
       var randomId = makeid();
-      var htmlMarker = '<div id="mymk' + randomId + '"></div>';
+      var htmlMarker = '<div data-val="'+num+'" class="markup" id="mymk' + randomId + '"></div>';
       var parent = _viewer3D.container
       $(parent).append(htmlMarker);
       $('#mymk'+randomId ).css({
-          'pointer-events': 'none',
           'width': '20px',
           'height': '20px',
           'position': 'absolute',
-          'overflow': 'visible' 
+          'overflow': 'visible' ,
+          'cursor':'pointer'
           });
       
-      $('#mymk'+randomId).append('<svg id="mysvg'+randomId+ '"></svg>')
+      $('#mymk'+randomId).append('<svg width="30" height="30" id="mysvg'+randomId+ '"></svg>')
       var snap = Snap($('#mysvg'+randomId)[0]);
       var rad = 12;
       var circle = snap.paper.circle(14, 14, rad);

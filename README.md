@@ -1,13 +1,11 @@
-# Thermon POC
+# ABB POC
 [![OAuth2](https://img.shields.io/badge/OAuth2-v1-green.svg)](http://developer.autodesk.com/)
 [![Data-Management](https://img.shields.io/badge/Data%20Management-v2-green.svg)](http://developer.autodesk.com/)
 [![Viewer](https://img.shields.io/badge/Viewer-v4.0-green.svg)](http://developer.autodesk.com/)
 
 This sample is for viewing models and issues.
 
-### Live version
 
-[https://thermonpoc.herokuapp.com/](https://thermonpoc.herokuapp.com/)
 
 
 # Setup
@@ -20,7 +18,7 @@ Install [NodeJS](https://nodejs.org).
 
 Clone this project or download it. It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-    git clone https://git.autodesk.com/t-pativ/VinciProject.git
+    git clone https://github.com/libvarun/ABB_POC
 
 To run it, install the required packages, set the enviroment variables with your client ID & secret and finally start it. Via command line, navigate to the folder where this repository was cloned and use the following:
 
